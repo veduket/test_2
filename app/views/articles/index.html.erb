@@ -1,0 +1,34 @@
+<h1>Listing articles</h1>
+ 
+<%= link_to 'New article', new_article_path %>
+ 
+<%= search_form_for @q, url: search_articles_path,
+                        html: { method: :post } do |f| %>
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+<table>
+  <tr>
+    <th><%= sort_link @q, :title, "Title" %></th>
+    <th><%= sort_link @q, :text, "Text" %></th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+      <td><%= link_to 'Edit', edit_article_path(article) %></td>
+      <td><%= link_to 'Destroy', article_path(article),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @articles %>
