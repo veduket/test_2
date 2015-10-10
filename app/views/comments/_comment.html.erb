@@ -1,14 +1,15 @@
 <p>
   <strong>Commenter:</strong>
-  <%= comment.commenter %>
+  <%= comment.inspect %>
 </p>
- 
+
 <p>
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
 
  <p>
+<%#= current_user.inspect  %>
 Fun : <%= rating_for comment, "fun", :star => 10 %>
 </p>
 
